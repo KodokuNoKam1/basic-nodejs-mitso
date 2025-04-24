@@ -1,19 +1,25 @@
-import express from 'express';
-
-import userRouter from './resources/users/user.router.js';
+const express = require('express');
+const bodyParser = require('body-parser');
+const clientsRouter = require('./resources/clients/client.router');
+const ordersRouter = require('./resources/orders/order.router');
+const productsRouter = require('./resources/products/product.router');
+const usersRouter = require('./resources/users/user.router');
 
 const app = express();
 
-app.use(express.json());
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', (req, res, next) => {
-  if (req.originalUrl === '/') {
-    res.send('Service is running!');
-    return;
-  }
-  next();
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.send('Service is running!');
 });
 
-app.use('/users', userRouter);
+// Routers
+app.use('/clients', clientsRouter);
+app.use('/orders', ordersRouter);
+app.use('/products', productsRouter);
+app.use('/users', usersRouter);
 
-export default app;
+module.exports = app;
