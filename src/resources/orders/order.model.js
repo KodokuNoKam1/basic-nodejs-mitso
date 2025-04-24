@@ -1,4 +1,4 @@
-const { v4: uuid } = require('uuid');
+import { v4 as uuid } from 'uuid';
 
 class Order {
   constructor({ id = uuid(), clientId, productIds = [], totalAmount } = {}) {
@@ -14,4 +14,4 @@ class Order {
   }
 }
 
-module.exports = Order;
+export default Order;

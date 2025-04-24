@@ -1,9 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const Client = require('./client.model');
-const clientsService = require('./client.service');
+import express from 'express';
+import Client from './client.model.js';
+import clientsService from './client.service.js';
 
-router.route('/')
+const router = express.Router();
+
+router
+  .route('/')
   .get(async (req, res) => {
     const clients = await clientsService.getAll();
     res.json(clients.map(Client.toResponse));
@@ -13,7 +15,8 @@ router.route('/')
     res.status(201).json(Client.toResponse(client));
   });
 
-router.route('/:id')
+router
+  .route('/:id')
   .get(async (req, res) => {
     const client = await clientsService.getById(req.params.id);
     if (client) {
@@ -39,4 +42,4 @@ router.route('/:id')
     }
   });
 
-module.exports = router;
+export default router;

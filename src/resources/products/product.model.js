@@ -1,4 +1,4 @@
-const { v4: uuid } = require('uuid');
+import { v4 as uuid } from 'uuid';
 
 class Product {
   constructor({ id = uuid(), name, price } = {}) {
@@ -13,4 +13,4 @@ class Product {
   }
 }
 
-module.exports = Product;
+export default Product;

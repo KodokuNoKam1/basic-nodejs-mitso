@@ -1,4 +1,4 @@
-const { v4: uuid } = require('uuid');
+import { v4 as uuid } from 'uuid';
 
 class Client {
   constructor({ id = uuid(), name, email } = {}) {
@@ -13,4 +13,4 @@ class Client {
   }
 }
 
-module.exports = Client;
+export default Client;

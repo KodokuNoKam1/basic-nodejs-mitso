@@ -1,9 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const User = require('./user.model');
-const usersService = require('./user.service');
+import express from 'express';
+import User from './user.model.js';
+import usersService from './user.service.js';
 
-router.route('/')
+const router = express.Router();
+
+router
+  .route('/')
   .get(async (req, res) => {
     const users = await usersService.getAll();
     res.json(users.map(User.toResponse));
@@ -13,7 +15,8 @@ router.route('/')
     res.status(201).json(User.toResponse(user));
   });
 
-router.route('/:id')
+router
+  .route('/:id')
   .get(async (req, res) => {
     const user = await usersService.getById(req.params.id);
     if (user) {
@@ -39,4 +42,4 @@ router.route('/:id')
     }
   });
 
-module.exports = router;
+export default router;

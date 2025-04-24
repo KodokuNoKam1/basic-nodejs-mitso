@@ -1,9 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const Product = require('./product.model');
-const productsService = require('./product.service');
+import express from 'express';
+import Product from './product.model.js';
+import productsService from './product.service.js';
 
-router.route('/')
+const router = express.Router();
+
+router
+  .route('/')
   .get(async (req, res) => {
     const products = await productsService.getAll();
     res.json(products.map(Product.toResponse));
@@ -13,7 +15,8 @@ router.route('/')
     res.status(201).json(Product.toResponse(product));
   });
 
-router.route('/:id')
+router
+  .route('/:id')
   .get(async (req, res) => {
     const product = await productsService.getById(req.params.id);
     if (product) {
@@ -39,4 +42,4 @@ router.route('/:id')
     }
   });
 
-module.exports = router;
+export default router;

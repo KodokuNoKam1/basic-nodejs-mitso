@@ -1,25 +1,16 @@
-const products = [];
+import productRepo from './product.memory.repository.js';
 
-const getAll = async () => products;
+const getAll = async () => await productRepo.getAll();
 
-const getById = async (id) => products.find(product => product.id === id);
+const getById = async (id) => await productRepo.getById(id);
 
-const save = async (product) => {
-  products.push(product);
-  return product;
+const create = async (productData) => {
+  const product = { ...productData };
+  return await productRepo.save(product);
 };
 
-const updateById = async (id, data) => {
-  const index = products.findIndex(product => product.id === id);
-  if (index === -1) return null;
-  products[index] = { ...products[index], ...data };
-  return products[index];
-};
+const updateById = async (id, data) => await productRepo.updateById(id, data);
 
-const deleteById = async (id) => {
-  const index = products.findIndex(product => product.id === id);
-  if (index === -1) return null;
-  return products.splice(index, 1)[0];
-};
+const deleteById = async (id) => await productRepo.deleteById(id);
 
-module.exports = { getAll, getById, save, updateById, deleteById };
+export default { getAll, getById, create, updateById, deleteById };

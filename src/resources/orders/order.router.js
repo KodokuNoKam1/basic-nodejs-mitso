@@ -1,9 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const Order = require('./order.model');
-const ordersService = require('./order.service');
+import express from 'express';
+import Order from './order.model.js';
+import ordersService from './order.service.js';
 
-router.route('/')
+const router = express.Router();
+
+router
+  .route('/')
   .get(async (req, res) => {
     const orders = await ordersService.getAll();
     res.json(orders.map(Order.toResponse));
@@ -13,7 +15,8 @@ router.route('/')
     res.status(201).json(Order.toResponse(order));
   });
 
-router.route('/:id')
+router
+  .route('/:id')
   .get(async (req, res) => {
     const order = await ordersService.getById(req.params.id);
     if (order) {
@@ -39,4 +42,4 @@ router.route('/:id')
     }
   });
 
-module.exports = router;
+export default router;

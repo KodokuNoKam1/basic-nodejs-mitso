@@ -22,4 +22,4 @@ const deleteById = async (id) => {
   return clients.splice(index, 1)[0];
 };
 
-module.exports = { getAll, getById, save, updateById, deleteById };
+export default { getAll, getById, save, updateById, deleteById };

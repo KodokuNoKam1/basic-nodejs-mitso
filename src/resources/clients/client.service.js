@@ -1,4 +1,4 @@
-const clientRepo = require('./client.memory.repository');
+import clientRepo from './client.memory.repository.js';
 
 const getAll = async () => await clientRepo.getAll();
 
@@ -13,4 +13,4 @@ const updateById = async (id, data) => await clientRepo.updateById(id, data);
 
 const deleteById = async (id) => await clientRepo.deleteById(id);
 
-module.exports = { getAll, getById, create, updateById, deleteById };
+export default { getAll, getById, create, updateById, deleteById };

@@ -1,4 +1,4 @@
-const orderRepo = require('./order.memory.repository');
+import orderRepo from './order.memory.repository.js';
 
 const getAll = async () => await orderRepo.getAll();
 
@@ -13,4 +13,4 @@ const updateById = async (id, data) => await orderRepo.updateById(id, data);
 
 const deleteById = async (id) => await orderRepo.deleteById(id);
 
-module.exports = { getAll, getById, create, updateById, deleteById };
+export default { getAll, getById, create, updateById, deleteById };
